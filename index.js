@@ -24,7 +24,6 @@ const recipeMaking = async () => {
 		const createdRecipe = await Recipe.create(myRecipe);
 		console.log(createdRecipe.title);
 		const manyRecipes = await Recipe.insertMany(data);
-		//console.log(manyRecipes);
 		manyRecipes.forEach((recipe) => {
 			console.log(recipe.title);
 		});
@@ -33,6 +32,9 @@ const recipeMaking = async () => {
 			{ duration: 100 }
 		);
 		console.log(`You successfully updated ${updatedRecipe.title}!`);
+		await Recipe.deleteOne({ title: "Carrot Cake" });
+		console.log(`Oh no! You deleted a recipe!`);
+		await mongoose.connection.close();
 	} catch (error) {
 		console.log(error);
 	}
